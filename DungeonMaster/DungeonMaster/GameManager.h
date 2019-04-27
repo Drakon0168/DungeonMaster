@@ -13,7 +13,7 @@ class GameManager
 public:
 	int windowWidth;
 	int windowHeight;
-	RenderWindow* window;
+	sf::RenderWindow* window;
 
 	~GameManager();
 

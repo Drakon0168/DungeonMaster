@@ -1,8 +1,11 @@
 #pragma once
 
-using namespace sf;
+#include "IDrawable.h"
+#include "IUpdatable.h"
 
-class Screen
+using namespace std;
+
+class Screen : public IDrawable, public IUpdatable
 {
 public:
 	Screen();
@@ -11,9 +14,12 @@ public:
 	//Draws all sprites for the screen
 	virtual void Display();
 	//Updates all of the objects for the screen
-	virtual void Update() = 0;
-private:
-	RectangleShape* background;
-	Color backgroundColor = Color::White;
+	virtual void Update();
+protected:
+	sf::RectangleShape* background;
+	sf::Color backgroundColor = sf::Color::White;
+
+	shared_ptr<vector<IDrawable*>> drawableObjects;
+	shared_ptr<vector<IUpdatable*>> updatableObjects;
 };
 

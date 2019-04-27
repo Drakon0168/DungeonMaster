@@ -1,22 +1,18 @@
 #include "pch.h"
 #include "MainMenuScreen.h"
+#include "Button.h"
 
 MainMenuScreen::MainMenuScreen()
 {
+	Screen::Screen();
+
+	Button* playButton = new Button();
+
+	drawableObjects->push_back((IDrawable*)playButton);
+	updatableObjects->push_back((IUpdatable*)playButton);
 }
 
 MainMenuScreen::~MainMenuScreen()
 {
-}
-
-void MainMenuScreen::Display()
-{
-	Screen::Display();
-
-	std::cout << "Drawing the main menu Screen" << std::endl;
-}
-
-void MainMenuScreen::Update()
-{
-	std::cout << "Updating the Main Menu Screen" << std::endl;
+	Screen::~Screen();
 }
