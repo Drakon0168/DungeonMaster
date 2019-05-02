@@ -20,6 +20,8 @@ public:
 
 	void Display();
 	void Update();
+
+	void(*OnClick)();
 private:
 	std::shared_ptr<RectangleShape> background;
 	std::shared_ptr<Font> font;
