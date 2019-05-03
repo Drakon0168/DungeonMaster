@@ -15,11 +15,10 @@ public:
 	Button();
 	~Button();
 
-	void SetBackgroundColor(Color color);
-	void SetTextColor(Color color);
-
 	void Display();
 	void Update();
+
+	bool ContainsPoint(sf::Vector2i);
 
 	void(*OnClick)();
 private:

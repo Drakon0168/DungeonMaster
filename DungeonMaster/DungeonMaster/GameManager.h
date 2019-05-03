@@ -26,6 +26,17 @@ public:
 	void Display();
 	//Calls the Update method of the screen that is currently active
 	void Update();
+
+	//Global Variables
+	sf::Color buttonDefaultColor;
+	sf::Color buttonHoverColor;
+	sf::Color buttonPressedColor;
+	int defaultTextSize = 24;
+
+	//The position of the window on the screen
+	sf::Vector2i windowPosition;
+	//The mouse position on the window
+	sf::Vector2i mousePosition;
 private:
 	GameManager();
 	shared_ptr<vector<Screen*>> screens;

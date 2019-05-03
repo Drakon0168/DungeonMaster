@@ -19,7 +19,7 @@ protected:
 	sf::RectangleShape* background;
 	sf::Color backgroundColor = sf::Color::White;
 
-	shared_ptr<vector<IDrawable*>> drawableObjects;
-	shared_ptr<vector<IUpdatable*>> updatableObjects;
+	vector<shared_ptr<IDrawable>> drawableObjects;
+	vector<shared_ptr<IUpdatable>> updatableObjects;
 };
 

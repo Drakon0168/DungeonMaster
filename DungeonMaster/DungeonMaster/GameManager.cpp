@@ -6,6 +6,10 @@ GameManager::GameManager()
 {
 	windowWidth = 800;
 	windowHeight = 600;
+
+	buttonDefaultColor = sf::Color(100, 100, 100, 255);
+	buttonHoverColor = sf::Color(200, 200, 200, 255);
+	buttonPressedColor = sf::Color(50, 50, 50, 255);
 }
 
 GameManager::~GameManager()
@@ -38,5 +42,8 @@ void GameManager::Display()
 
 void GameManager::Update()
 {
+	windowPosition = window->getPosition();
+	mousePosition = sf::Mouse::getPosition(*window);
+
 	(*screens)[(int)currentScreen]->Update();
 }

@@ -6,10 +6,10 @@ MainMenuScreen::MainMenuScreen()
 {
 	Screen::Screen();
 
-	Button* playButton = new Button();
+	shared_ptr<Button> playButton = shared_ptr<Button>(new Button());
 
-	drawableObjects->push_back((IDrawable*)playButton);
-	updatableObjects->push_back((IUpdatable*)playButton);
+	drawableObjects.push_back((shared_ptr<IDrawable>)playButton);
+	updatableObjects.push_back((shared_ptr<IUpdatable>)playButton);
 }
 
 MainMenuScreen::~MainMenuScreen()
