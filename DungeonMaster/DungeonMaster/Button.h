@@ -1,6 +1,7 @@
 #pragma once
 
 #include "pch.h"
+#include "Screen.h"
 #include "IDrawable.h"
 #include "IUpdatable.h"
 

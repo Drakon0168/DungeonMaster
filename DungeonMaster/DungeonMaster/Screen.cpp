@@ -28,3 +28,8 @@ void Screen::Update()
 		updatableObjects[i]->Update();
 	}
 }
+
+void Screen::closeGame()
+{
+	exit(0);
+}

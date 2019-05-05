@@ -49,7 +49,10 @@ void Button::Update()
 		if (Mouse::isButtonPressed(Mouse::Left)) {
 			background->setFillColor(GameManager::Instance()->buttonPressedColor);
 
-			//Call on click on the first frame that the mouse button is released
+			//TODO: Call on click on the first frame that the mouse button is released
+			if (OnClick != nullptr) {
+				OnClick();
+			}
 		}
 	}
 	else {

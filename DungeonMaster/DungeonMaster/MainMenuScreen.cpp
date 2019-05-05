@@ -10,6 +10,8 @@ MainMenuScreen::MainMenuScreen()
 
 	drawableObjects.push_back((shared_ptr<IDrawable>)playButton);
 	updatableObjects.push_back((shared_ptr<IUpdatable>)playButton);
+
+	playButton->OnClick = closeGame;
 }
 
 MainMenuScreen::~MainMenuScreen()

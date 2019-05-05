@@ -15,6 +15,8 @@ public:
 	virtual void Display();
 	//Updates all of the objects for the screen
 	virtual void Update();
+
+	static void closeGame();
 protected:
 	sf::RectangleShape* background;
 	sf::Color backgroundColor = sf::Color::White;
