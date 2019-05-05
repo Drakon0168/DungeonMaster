@@ -20,6 +20,7 @@ public:
 	Button();
 	Button(Vector2f position);
 	Button(Vector2f position, Vector2f size);
+	Button(Vector2f position, Vector2f size, Vector2f anchor);
 	~Button();
 
 	void Display();

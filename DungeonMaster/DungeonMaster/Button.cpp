@@ -49,6 +49,22 @@ Button::Button(Vector2f position, Vector2f size)
 	background->setPosition(Vector2f(anchor.x * GameManager::Instance()->windowWidth, anchor.y * GameManager::Instance()->windowHeight) + position);
 	background->setFillColor(Color(100, 100, 100, 255));
 
+	setupText("Fonts/TestFont.tff", "Untitled");
+}
+
+Button::Button(Vector2f position, Vector2f size, Vector2f anchor)
+{
+	this->position = position;
+	this->size = size;
+	this->anchor = anchor;
+	OnClick = nullptr;
+
+	//Setup the rectangle
+	background = std::shared_ptr<RectangleShape>(new RectangleShape(size));
+	background->setOrigin(size.x / 2, size.y / 2);
+	background->setPosition(Vector2f(anchor.x * GameManager::Instance()->windowWidth, anchor.y * GameManager::Instance()->windowHeight) + position);
+	background->setFillColor(Color(100, 100, 100, 255));
+
 	setupText("Fonts\\TestFont.tff", "Untitled");
 }
 
@@ -90,6 +106,8 @@ bool Button::ContainsPoint(sf::Vector2i p)
 
 void Button::setupText(string fontPath, string buttonText)
 {
+	//The font has been temporarily removed from the folder
+
 	//Load the font
 	font = std::shared_ptr<Font>(new Font());
 	font->loadFromFile(fontPath);
