@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "GameManager.h"
 #include "MainMenuScreen.h"
+#include "GameplayScreen.h"
 
 GameManager::GameManager()
 {
@@ -33,6 +34,13 @@ void GameManager::SetupScreens()
 
 	screens = shared_ptr<vector<Screen*>>(new vector<Screen*>);
 	screens->push_back((Screen*) new MainMenuScreen());
+	screens->push_back((Screen*) new GameplayScreen());
+}
+
+void GameManager::SwitchScreen(ScreenType screen)
+{
+	//TODO Add screen switch animation
+	currentScreen = screen;
 }
 
 void GameManager::Display()

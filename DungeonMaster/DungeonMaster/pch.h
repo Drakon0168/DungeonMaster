@@ -2,6 +2,7 @@
 #define PCH_H
 
 #include <iostream>
+#include <fstream>
 #include <memory>
 
 #define SFML_STATIC

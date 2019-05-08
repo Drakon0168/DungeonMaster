@@ -10,4 +10,6 @@ class MainMenuScreen : public Screen
 public:
 	MainMenuScreen();
 	~MainMenuScreen();
+
+	static void PlayClicked();
 };

@@ -21,6 +21,8 @@ public:
 
 	//Sets the screens vector 
 	void SetupScreens();
+	//Switches to the specified screen
+	void SwitchScreen(ScreenType screen);
 
 	//Calls the Display method of the screen that is currently active
 	void Display();
