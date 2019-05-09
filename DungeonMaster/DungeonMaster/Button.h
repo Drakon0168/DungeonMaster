@@ -21,6 +21,9 @@ public:
 	Button(Vector2f position);
 	Button(Vector2f position, Vector2f size);
 	Button(Vector2f position, Vector2f size, Vector2f anchor);
+	Button(Vector2f position, Vector2f size, String buttonText);
+	Button(Vector2f position, Vector2f size, Vector2f anchor, String buttonText);
+	Button(Vector2f position, Vector2f size, Vector2f anchor, String buttonText, String fontFile);
 	~Button();
 
 	void Display();

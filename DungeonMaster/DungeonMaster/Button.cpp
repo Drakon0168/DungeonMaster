@@ -17,7 +17,7 @@ Button::Button()
 	background->setPosition(Vector2f(anchor.x * GameManager::Instance()->windowWidth, anchor.y * GameManager::Instance()->windowHeight) + position);
 	background->setFillColor(Color(100, 100, 100, 255));
 
-	setupText("Fonts\\TestFont.tff", "Untitled");
+	setupText("Fonts\\TestFont.ttf", "Untitled");
 }
 
 Button::Button(Vector2f position)
@@ -33,7 +33,7 @@ Button::Button(Vector2f position)
 	background->setPosition(Vector2f(anchor.x * GameManager::Instance()->windowWidth, anchor.y * GameManager::Instance()->windowHeight) + position);
 	background->setFillColor(Color(100, 100, 100, 255));
 
-	setupText("Fonts\\TestFont.tff", "Untitled");
+	setupText("Fonts\\TestFont.ttf", "Untitled");
 }
 
 Button::Button(Vector2f position, Vector2f size)
@@ -49,7 +49,7 @@ Button::Button(Vector2f position, Vector2f size)
 	background->setPosition(Vector2f(anchor.x * GameManager::Instance()->windowWidth, anchor.y * GameManager::Instance()->windowHeight) + position);
 	background->setFillColor(Color(100, 100, 100, 255));
 
-	setupText("Fonts/TestFont.tff", "Untitled");
+	setupText("Fonts\\TestFont.ttf", "Untitled");
 }
 
 Button::Button(Vector2f position, Vector2f size, Vector2f anchor)
@@ -65,7 +65,55 @@ Button::Button(Vector2f position, Vector2f size, Vector2f anchor)
 	background->setPosition(Vector2f(anchor.x * GameManager::Instance()->windowWidth, anchor.y * GameManager::Instance()->windowHeight) + position);
 	background->setFillColor(Color(100, 100, 100, 255));
 
-	setupText("Fonts\\TestFont.tff", "Untitled");
+	setupText("Fonts\\TestFont.ttf", "Untitled");
+}
+
+Button::Button(Vector2f position, Vector2f size, String buttonText)
+{
+	this->position = position;
+	this->size = size;
+	anchor = Vector2f(0.5f, 0.5f);
+	OnClick = nullptr;
+
+	//Setup the rectangle
+	background = std::shared_ptr<RectangleShape>(new RectangleShape(size));
+	background->setOrigin(size.x / 2, size.y / 2);
+	background->setPosition(Vector2f(anchor.x * GameManager::Instance()->windowWidth, anchor.y * GameManager::Instance()->windowHeight) + position);
+	background->setFillColor(Color(100, 100, 100, 255));
+
+	setupText("Fonts\\TestFont.ttf", buttonText);
+}
+
+Button::Button(Vector2f position, Vector2f size, Vector2f anchor, String buttonText)
+{
+	this->position = position;
+	this->size = size;
+	this->anchor = anchor;
+	OnClick = nullptr;
+
+	//Setup the rectangle
+	background = std::shared_ptr<RectangleShape>(new RectangleShape(size));
+	background->setOrigin(size.x / 2, size.y / 2);
+	background->setPosition(Vector2f(anchor.x * GameManager::Instance()->windowWidth, anchor.y * GameManager::Instance()->windowHeight) + position);
+	background->setFillColor(Color(100, 100, 100, 255));
+
+	setupText("Fonts\\TestFont.ttf", buttonText);
+}
+
+Button::Button(Vector2f position, Vector2f size, Vector2f anchor, String buttonText, String fontFile)
+{
+	this->position = position;
+	this->size = size;
+	this->anchor = anchor;
+	OnClick = nullptr;
+
+	//Setup the rectangle
+	background = std::shared_ptr<RectangleShape>(new RectangleShape(size));
+	background->setOrigin(size.x / 2, size.y / 2);
+	background->setPosition(Vector2f(anchor.x * GameManager::Instance()->windowWidth, anchor.y * GameManager::Instance()->windowHeight) + position);
+	background->setFillColor(Color(100, 100, 100, 255));
+
+	setupText("Fonts\\" + fontFile, buttonText);
 }
 
 Button::~Button()
@@ -119,6 +167,7 @@ void Button::setupText(string fontPath, string buttonText)
 	text->setString(buttonText);
 	text->setCharacterSize(GameManager::Instance()->defaultTextSize);
 	text->setFillColor(Color::Black);
-	text->setPosition(position);
+	text->setPosition(Vector2f(anchor.x * GameManager::Instance()->windowWidth, anchor.y * GameManager::Instance()->windowHeight) + position);
 	text->setStyle(sf::Text::Regular);
+	text->setOrigin(text->getLocalBounds().width / 2, text->getLocalBounds().height / 2);
 }
