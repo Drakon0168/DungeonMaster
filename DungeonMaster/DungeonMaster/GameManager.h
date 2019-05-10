@@ -13,6 +13,7 @@ class GameManager
 public:
 	int windowWidth;
 	int windowHeight;
+	float deltaTime;
 	sf::RenderWindow* window;
 
 	~GameManager();
@@ -27,7 +28,7 @@ public:
 	//Calls the Display method of the screen that is currently active
 	void Display();
 	//Calls the Update method of the screen that is currently active
-	void Update();
+	void Update(float deltaTime);
 
 	//Global Variables
 	sf::Color buttonDefaultColor;

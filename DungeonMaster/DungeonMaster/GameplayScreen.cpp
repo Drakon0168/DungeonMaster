@@ -13,9 +13,9 @@ GameplayScreen::GameplayScreen()
 	updatableObjects.push_back((shared_ptr<IUpdatable>)exitButton);
 	exitButton->OnClick = closeGame;
 
-	//Setup the dungeon
-	tile = shared_ptr<Tile>(new Tile());
-	drawableObjects.push_back((shared_ptr<IDrawable>)tile);
+	floor = shared_ptr<Floor>(new Floor(10));
+	drawableObjects.push_back((shared_ptr<IDrawable>)floor);
+	updatableObjects.push_back((shared_ptr<IUpdatable>)floor);
 }
 
 GameplayScreen::~GameplayScreen()

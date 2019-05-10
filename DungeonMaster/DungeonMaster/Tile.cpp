@@ -1,19 +1,18 @@
 #include "pch.h"
 #include "Tile.h"
 #include "GameManager.h"
+#include "Floor.h"
 
-using namespace sf;
-
-Tile::Tile()
+Tile::Tile(sf::Vector2f position)
 {
-	position = Vector2f(500, 500);
+	this->position = position;
 	type = TileType::Wall;
-	texture = std::shared_ptr<Texture>(new Texture());
-	sprite = std::shared_ptr<Sprite>(new Sprite());
+	texture = std::shared_ptr<sf::Texture>(new sf::Texture());
+	sprite = std::shared_ptr<sf::Sprite>(new sf::Sprite());
 
 	texture->loadFromFile("Textures\\Square64x64.png");
 	sprite->setTexture(*texture);
-	sprite->setPosition(position);
+	sprite->setPosition(position * (float)texture->getSize().x);
 }
 
 Tile::~Tile()

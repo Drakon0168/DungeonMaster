@@ -5,7 +5,7 @@
 #include "IUpdatable.h"
 #include "Screen.h"
 
-#include "Tile.h"
+#include "Floor.h"
 
 class GameplayScreen : public Screen
 {
@@ -14,6 +14,6 @@ public:
 	~GameplayScreen();
 
 	//Placeholder for testing
-	shared_ptr<Tile> tile;
+	shared_ptr<Floor> floor;
 };
 

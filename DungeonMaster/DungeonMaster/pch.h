@@ -4,6 +4,8 @@
 #include <iostream>
 #include <fstream>
 #include <memory>
+#include <map>
+#include <vector>
 
 #define SFML_STATIC
 #include <SFML/Window.hpp>

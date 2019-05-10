@@ -7,6 +7,9 @@ GameManager::GameManager()
 {
 	windowWidth = 800;
 	windowHeight = 600;
+	currentScreen = ScreenType::MainMenu;
+	deltaTime = 0;
+	window = nullptr;
 
 	buttonDefaultColor = sf::Color(100, 100, 100, 255);
 	buttonHoverColor = sf::Color(200, 200, 200, 255);
@@ -15,7 +18,7 @@ GameManager::GameManager()
 
 GameManager::~GameManager()
 {
-	for (int i = 0; i < screens->size(); i++)
+	for (unsigned int i = 0; i < screens->size(); i++)
 	{
 		delete (*screens)[i];
 	}
@@ -48,8 +51,10 @@ void GameManager::Display()
 	(*screens)[(int)currentScreen]->Display();
 }
 
-void GameManager::Update()
+void GameManager::Update(float deltaTime)
 {
+	this->deltaTime = deltaTime;
+
 	windowPosition = window->getPosition();
 	mousePosition = sf::Mouse::getPosition(*window);
 

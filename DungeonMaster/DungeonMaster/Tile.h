@@ -4,7 +4,7 @@
 #include "IDrawable.h"
 
 enum TileType {
-	Floor,
+	Open,
 	Wall
 };
 
@@ -14,7 +14,7 @@ public:
 	TileType type;
 	sf::Vector2f position;
 
-	Tile();
+	Tile(sf::Vector2f position);
 	~Tile();
 
 	void Display();

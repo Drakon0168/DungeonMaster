@@ -32,7 +32,7 @@ int main()
 
 		//Process Input
 
-		GameManager::Instance()->Update();
+		GameManager::Instance()->Update(deltaTime);
 
 		window.clear();
 
