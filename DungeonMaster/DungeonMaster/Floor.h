@@ -12,7 +12,8 @@ public:
 	int size;
 	//The size of a tile in pixels
 	int tileSize;
-	std::map<sf::Vector2f, std::shared_ptr<Tile>> tiles;
+
+	std::vector<std::shared_ptr<Tile>> tiles;
 
 	Floor(int size);
 	~Floor();
