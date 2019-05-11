@@ -13,6 +13,8 @@ Tile::Tile(sf::Vector2f position)
 	texture->loadFromFile("Textures\\Square64x64.png");
 	sprite->setTexture(*texture);
 	sprite->setPosition(position * (float)texture->getSize().x);
+
+	std::cout << "Tile Size: " << texture->getSize().x << std::endl;
 }
 
 Tile::~Tile()

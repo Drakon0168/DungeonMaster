@@ -19,6 +19,10 @@ void Screen::Display()
 	for (int i = 0; i < drawableObjects.size(); i++) {
 		drawableObjects[i]->Display();
 	}
+
+	for (int i = 0; i < UIObjects.size(); i++) {
+		UIObjects[i]->Display();
+	}
 }
 
 void Screen::Update()

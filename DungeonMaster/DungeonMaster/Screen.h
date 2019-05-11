@@ -22,6 +22,7 @@ protected:
 	sf::Color backgroundColor = sf::Color::White;
 
 	vector<shared_ptr<IDrawable>> drawableObjects;
+	vector<shared_ptr<IDrawable>> UIObjects;
 	vector<shared_ptr<IUpdatable>> updatableObjects;
 };
 

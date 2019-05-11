@@ -9,7 +9,7 @@ GameplayScreen::GameplayScreen()
 
 	//	Create Exit Button
 	shared_ptr<Button> exitButton = shared_ptr<Button>(new Button(Vector2f(30, 30), Vector2f(50, 50), Vector2f(0,0), "Exit"));
-	drawableObjects.push_back((shared_ptr<IDrawable>)exitButton);
+	UIObjects.push_back((shared_ptr<IDrawable>)exitButton);
 	updatableObjects.push_back((shared_ptr<IUpdatable>)exitButton);
 	exitButton->OnClick = closeGame;
 
