@@ -10,7 +10,7 @@ GameplayScreen::GameplayScreen()
 	Screen::Screen();
 
 	//Setup Camera
-	cameraSpeed = 100.0f;
+	cameraMaxSpeed = 200.0f;
 	cameraMoveThreshold = 150;
 
 	//	Create Exit Button
@@ -38,10 +38,31 @@ void GameplayScreen::Update()
 	Vector2f cameraDirection = Vector2f(0, 0);
 
 	//TODO: Ease in and out of camera motion
+	float distanceFromEdge = cameraMoveThreshold;
+
 	if (mousePosition.x < cameraMoveThreshold || mousePosition.y < cameraMoveThreshold || mousePosition.x > GameManager::Instance()->windowWidth - cameraMoveThreshold || mousePosition.y > GameManager::Instance()->windowHeight - cameraMoveThreshold) {
+		if (mousePosition.x < distanceFromEdge) {
+			distanceFromEdge = mousePosition.x;
+		}
+		if (mousePosition.y < distanceFromEdge) {
+			distanceFromEdge = mousePosition.y;
+		}
+		if (GameManager::Instance()->windowWidth - mousePosition.x < distanceFromEdge) {
+			distanceFromEdge = GameManager::Instance()->windowWidth - mousePosition.x;
+		}
+		if (GameManager::Instance()->windowHeight - mousePosition.y < distanceFromEdge) {
+			distanceFromEdge = GameManager::Instance()->windowHeight - mousePosition.y;
+		}
+
+		if (distanceFromEdge < 0) {
+			distanceFromEdge = 0;
+		}
+
+		distanceFromEdge = cameraMoveThreshold - distanceFromEdge;
+
 		cameraDirection = Vector2f(mousePosition.x - (GameManager::Instance()->windowWidth / 2), mousePosition.y - (GameManager::Instance()->windowWidth / 2));
 		cameraDirection *= 1 / sqrt(cameraDirection.x * cameraDirection.x + cameraDirection.y * cameraDirection.y);
 	}
 
-	DefaultView->move(cameraDirection * cameraSpeed * GameManager::Instance()->deltaTime);
+	DefaultView->move(cameraDirection * cameraMaxSpeed * (distanceFromEdge / cameraMoveThreshold) * GameManager::Instance()->deltaTime);
 }

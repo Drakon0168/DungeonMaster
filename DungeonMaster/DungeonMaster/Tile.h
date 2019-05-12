@@ -4,8 +4,8 @@
 #include "IDrawable.h"
 
 enum TileType {
-	Open,
-	Wall
+	Wall,
+	Open
 };
 
 class Tile : public IDrawable
@@ -18,9 +18,11 @@ public:
 	~Tile();
 
 	void Display();
+	
+	void ChangeType(TileType type);
 
 private:
 	std::shared_ptr<sf::Sprite> sprite;
-	std::shared_ptr<sf::Texture> texture;
+	float textureTileSize;
 };
 

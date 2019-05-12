@@ -6,7 +6,6 @@ using namespace sf;
 Floor::Floor(const int size)
 {
 	this->size = size;
-	tileSize = 32;
 
 	//Setup grid
 	for (int i = 0; i < size; i++) {

@@ -2,21 +2,21 @@
 #include "Tile.h"
 #include "GameManager.h"
 #include "Floor.h"
+#include "Dungeon.h"
 
 Tile::Tile(sf::Vector2f position)
 {
 	this->position = position;
-	type = TileType::Wall;
-	texture = std::shared_ptr<sf::Texture>(new sf::Texture());
+	type = TileType::Open;
 	sprite = std::shared_ptr<sf::Sprite>(new sf::Sprite());
 
-	float tileSize = 32.0f;
+	float tileSize = Dungeon::tileSize;
+	textureTileSize = 32.0f;
 
-	//TODO: load the texture in the game manager or some other singleton and share it between all of the tiles
-	texture->loadFromFile("Textures\\Square64x64.png");
-	sprite->setTexture(*texture);
-	sprite->setScale(tileSize / texture->getSize().x, tileSize / texture->getSize().y);
-	sprite->setPosition(position * tileSize);// (float)texture->getSize().x);
+	sprite->setTexture(*Dungeon::tileTexture);
+	sprite->setTextureRect(sf::IntRect(textureTileSize * type, 0, textureTileSize, textureTileSize));
+	sprite->setScale(tileSize / sprite->getTextureRect().width, tileSize / sprite->getTextureRect().height);
+	sprite->setPosition(position * tileSize);
 }
 
 Tile::~Tile()
@@ -26,4 +26,10 @@ Tile::~Tile()
 void Tile::Display()
 {
 	GameManager::Instance()->window->draw(*sprite);
+}
+
+void Tile::ChangeType(TileType type)
+{
+	this->type = type;
+	sprite->setTextureRect(sf::IntRect(textureTileSize * type, 0, textureTileSize, textureTileSize));
 }

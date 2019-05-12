@@ -104,5 +104,8 @@
     <Image Include="Textures\Square64x64.png">
       <Filter>Resources\Textures</Filter>
     </Image>
+    <Image Include="Textures\TileTexture.png">
+      <Filter>Resources\Textures</Filter>
+    </Image>
   </ItemGroup>
 </Project>

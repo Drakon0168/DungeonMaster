@@ -10,8 +10,7 @@ class Floor : public IDrawable, public IUpdatable
 public:
 	//The width of the floor in tiles
 	int size;
-	//The size of a tile in pixels
-	int tileSize;
+	//TODO: Figure out how to store tiles in a map based on their position
 	//The collection of all of the tiles on the floor
 	std::vector<std::shared_ptr<Tile>> tiles;
 

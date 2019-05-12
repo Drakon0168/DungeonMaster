@@ -199,6 +199,7 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="Textures\Square64x64.png" />
+    <Image Include="Textures\TileTexture.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
