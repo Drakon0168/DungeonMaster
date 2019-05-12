@@ -10,11 +10,13 @@ Tile::Tile(sf::Vector2f position)
 	texture = std::shared_ptr<sf::Texture>(new sf::Texture());
 	sprite = std::shared_ptr<sf::Sprite>(new sf::Sprite());
 
+	float tileSize = 64.0f;
+
+	//TODO: load the texture in the game manager or some other singleton and share it between all of the tiles
 	texture->loadFromFile("Textures\\Square64x64.png");
 	sprite->setTexture(*texture);
-	sprite->setPosition(position * (float)texture->getSize().x);
-
-	std::cout << "Tile Size: " << texture->getSize().x << std::endl;
+	sprite->setScale(tileSize / texture->getSize().x, tileSize / texture->getSize().y);
+	sprite->setPosition(position * tileSize);// (float)texture->getSize().x);
 }
 
 Tile::~Tile()

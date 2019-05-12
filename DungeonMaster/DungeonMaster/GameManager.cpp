@@ -42,7 +42,7 @@ void GameManager::SetupScreens()
 
 void GameManager::SwitchScreen(ScreenType screen)
 {
-	//TODO Add screen switch animation
+	//TODO: Add screen switch animation
 	currentScreen = screen;
 }
 

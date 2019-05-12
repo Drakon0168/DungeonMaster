@@ -156,7 +156,7 @@ void Button::setupText(string fontPath, string buttonText)
 {
 	//The font has been temporarily removed from the folder
 
-	//TODO load the font in the game manager or some other singleton
+	//TODO: load the font in the game manager or some other singleton
 	//Load the font
 	font = std::shared_ptr<Font>(new Font());
 	font->loadFromFile(fontPath);
