@@ -11,7 +11,7 @@ GameplayScreen::GameplayScreen()
 
 	//Setup Camera
 	cameraSpeed = 100.0f;
-	cameraMoveThreshold = 100;
+	cameraMoveThreshold = 150;
 
 	//	Create Exit Button
 	shared_ptr<Button> exitButton = shared_ptr<Button>(new Button(Vector2f(30, 30), Vector2f(50, 50), Vector2f(0,0), "Exit"));
@@ -35,21 +35,13 @@ void GameplayScreen::Update()
 
 	//TODO: Middle mouse drag camera movement
 
-	Vector2f cameraMovement = Vector2f(0, 0);
+	Vector2f cameraDirection = Vector2f(0, 0);
 
-	//TODO: Move more accurately based on the angle between the mouse position and the center of the screen rather than 8 directionally
-	if (mousePosition.x < cameraMoveThreshold) {
-		cameraMovement.x -= cameraSpeed;
-	}
-	if (mousePosition.y < cameraMoveThreshold) {
-		cameraMovement.y -= cameraSpeed;
-	}
-	if (mousePosition.x > GameManager::Instance()->windowWidth - cameraMoveThreshold) {
-		cameraMovement.x += cameraSpeed;
-	}
-	if (mousePosition.y > GameManager::Instance()->windowHeight - cameraMoveThreshold) {
-		cameraMovement.y += cameraSpeed;
+	//TODO: Ease in and out of camera motion
+	if (mousePosition.x < cameraMoveThreshold || mousePosition.y < cameraMoveThreshold || mousePosition.x > GameManager::Instance()->windowWidth - cameraMoveThreshold || mousePosition.y > GameManager::Instance()->windowHeight - cameraMoveThreshold) {
+		cameraDirection = Vector2f(mousePosition.x - (GameManager::Instance()->windowWidth / 2), mousePosition.y - (GameManager::Instance()->windowWidth / 2));
+		cameraDirection *= 1 / sqrt(cameraDirection.x * cameraDirection.x + cameraDirection.y * cameraDirection.y);
 	}
 
-	DefaultView->move(cameraMovement * GameManager::Instance()->deltaTime);
+	DefaultView->move(cameraDirection * cameraSpeed * GameManager::Instance()->deltaTime);
 }
