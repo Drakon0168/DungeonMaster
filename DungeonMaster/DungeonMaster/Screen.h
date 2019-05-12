@@ -8,6 +8,10 @@ using namespace std;
 class Screen : public IDrawable, public IUpdatable
 {
 public:
+	vector<shared_ptr<IDrawable>> drawableObjects;
+	vector<shared_ptr<IDrawable>> UIObjects;
+	vector<shared_ptr<IUpdatable>> updatableObjects;
+
 	Screen();
 	virtual ~Screen();
 
@@ -20,10 +24,6 @@ public:
 protected:
 	sf::RectangleShape* background;
 	sf::Color backgroundColor = sf::Color::White;
-
-	vector<shared_ptr<IDrawable>> drawableObjects;
-	vector<shared_ptr<IDrawable>> UIObjects;
-	vector<shared_ptr<IUpdatable>> updatableObjects;
 
 	shared_ptr<sf::View> UIView;
 	shared_ptr<sf::View> DefaultView;

@@ -15,13 +15,13 @@ GameplayScreen::GameplayScreen()
 
 	//	Create Exit Button
 	shared_ptr<Button> exitButton = shared_ptr<Button>(new Button(Vector2f(30, 30), Vector2f(50, 50), Vector2f(0,0), "Exit"));
-	UIObjects.push_back((shared_ptr<IDrawable>)exitButton);
-	updatableObjects.push_back((shared_ptr<IUpdatable>)exitButton);
+	UIObjects.push_back(exitButton);
+	updatableObjects.push_back(exitButton);
 	exitButton->OnClick = closeGame;
 
-	floor = shared_ptr<Floor>(new Floor(25));
-	drawableObjects.push_back((shared_ptr<IDrawable>)floor);
-	updatableObjects.push_back((shared_ptr<IUpdatable>)floor);
+	dungeon = shared_ptr<Dungeon>(new Dungeon(this, 5));
+	drawableObjects.push_back((shared_ptr<IDrawable>)dungeon);
+	updatableObjects.push_back((shared_ptr<IUpdatable>)dungeon);
 }
 
 GameplayScreen::~GameplayScreen()

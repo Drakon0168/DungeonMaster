@@ -12,7 +12,7 @@ public:
 	int size;
 	//The size of a tile in pixels
 	int tileSize;
-
+	//The collection of all of the tiles on the floor
 	std::vector<std::shared_ptr<Tile>> tiles;
 
 	Floor(int size);
@@ -20,8 +20,4 @@ public:
 
 	void Display();
 	void Update();
-
-private:
-	std::vector<std::shared_ptr<sf::Vector2f>> points;
 };
-

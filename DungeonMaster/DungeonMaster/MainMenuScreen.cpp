@@ -10,14 +10,14 @@ MainMenuScreen::MainMenuScreen()
 	//Create Buttons
 	//	Create Play Button
 	shared_ptr<Button> playButton = shared_ptr<Button>(new Button(Vector2f(0, -30), Vector2f(200,50), "Play"));
-	UIObjects.push_back((shared_ptr<IDrawable>)playButton);
-	updatableObjects.push_back((shared_ptr<IUpdatable>)playButton);
+	UIObjects.push_back(playButton);
+	updatableObjects.push_back(playButton);
 	playButton->OnClick = PlayClicked;
 
 	//	Create Exit Button
 	shared_ptr<Button> exitButton = shared_ptr<Button>(new Button(Vector2f(0, 30), Vector2f(200, 50), "Exit"));
-	UIObjects.push_back((shared_ptr<IDrawable>)exitButton);
-	updatableObjects.push_back((shared_ptr<IUpdatable>)exitButton);
+	UIObjects.push_back(exitButton);
+	updatableObjects.push_back(exitButton);
 	exitButton->OnClick = closeGame;
 }
 

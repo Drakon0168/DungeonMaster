@@ -32,8 +32,7 @@ void Screen::Display()
 
 void Screen::Update()
 {
-	for (int i = 0; i < updatableObjects.size(); i++)
-	{
+	for (int i = 0; i < updatableObjects.size(); i++) {
 		updatableObjects[i]->Update();
 	}
 }
