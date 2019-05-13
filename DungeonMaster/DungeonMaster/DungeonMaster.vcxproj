@@ -176,6 +176,7 @@
     <ClInclude Include="pch.h" />
     <ClInclude Include="Screen.h" />
     <ClInclude Include="Tile.h" />
+    <ClInclude Include="Vector2fComparer.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Button.cpp" />

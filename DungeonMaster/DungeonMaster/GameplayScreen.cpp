@@ -4,6 +4,8 @@
 #include "Button.h"
 
 #define mousePosition GameManager::Instance()->mousePosition
+#define windowWidth GameManager::Instance()->windowWidth
+#define windowHeight GameManager::Instance()->windowHeight
 
 GameplayScreen::GameplayScreen()
 {
@@ -37,21 +39,21 @@ void GameplayScreen::Update()
 
 	Vector2f cameraDirection = Vector2f(0, 0);
 
-	//TODO: Ease in and out of camera motion
+	//Check if the mouse is on the edge of the window and if it is set the camera direction
 	float distanceFromEdge = cameraMoveThreshold;
-
-	if (mousePosition.x < cameraMoveThreshold || mousePosition.y < cameraMoveThreshold || mousePosition.x > GameManager::Instance()->windowWidth - cameraMoveThreshold || mousePosition.y > GameManager::Instance()->windowHeight - cameraMoveThreshold) {
+	if (mousePosition.x < cameraMoveThreshold || mousePosition.y < cameraMoveThreshold || mousePosition.x > windowWidth - cameraMoveThreshold || mousePosition.y > windowHeight - cameraMoveThreshold) {
+		//Adjust camera move speed based on the mouse's distance from the edge of the screen
 		if (mousePosition.x < distanceFromEdge) {
 			distanceFromEdge = mousePosition.x;
 		}
 		if (mousePosition.y < distanceFromEdge) {
 			distanceFromEdge = mousePosition.y;
 		}
-		if (GameManager::Instance()->windowWidth - mousePosition.x < distanceFromEdge) {
-			distanceFromEdge = GameManager::Instance()->windowWidth - mousePosition.x;
+		if (windowWidth - mousePosition.x < distanceFromEdge) {
+			distanceFromEdge = windowWidth - mousePosition.x;
 		}
-		if (GameManager::Instance()->windowHeight - mousePosition.y < distanceFromEdge) {
-			distanceFromEdge = GameManager::Instance()->windowHeight - mousePosition.y;
+		if (windowHeight - mousePosition.y < distanceFromEdge) {
+			distanceFromEdge = windowHeight - mousePosition.y;
 		}
 
 		if (distanceFromEdge < 0) {
@@ -60,7 +62,7 @@ void GameplayScreen::Update()
 
 		distanceFromEdge = cameraMoveThreshold - distanceFromEdge;
 
-		cameraDirection = Vector2f(mousePosition.x - (GameManager::Instance()->windowWidth / 2), mousePosition.y - (GameManager::Instance()->windowWidth / 2));
+		cameraDirection = Vector2f(mousePosition.x - (windowWidth / 2), mousePosition.y - (windowWidth / 2));
 		cameraDirection *= 1 / sqrt(cameraDirection.x * cameraDirection.x + cameraDirection.y * cameraDirection.y);
 	}
 

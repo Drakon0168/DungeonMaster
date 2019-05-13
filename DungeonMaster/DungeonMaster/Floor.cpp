@@ -10,7 +10,7 @@ Floor::Floor(const int size)
 	//Setup grid
 	for (int i = 0; i < size; i++) {
 		for (int j = 0; j < size; j++) {
-			tiles.push_back(std::shared_ptr<Tile>(new Tile(Vector2f(i,j))));
+			tiles.insert(std::pair<Vector2f, std::shared_ptr<Tile>>(Vector2f(i,j), std::shared_ptr<Tile>(new Tile(Vector2f(i,j)))));
 		}
 	}
 }
@@ -20,8 +20,10 @@ Floor::~Floor()
 }
 
 void Floor::Display() {
-	for (unsigned int i = 0; i < tiles.size(); i++) {
-		tiles[i]->Display();
+	for (int i = 0; i < size; i++) {
+		for (int j = 0; j < size; j++) {
+			tiles[Vector2f(i,j)]->Display();
+		}
 	}
 }
 
