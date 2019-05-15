@@ -19,4 +19,7 @@ public:
 
 	void Display();
 	void Update();
+
+	//Checks whether the given point is on the floor and if it is returns the tile at that point
+	std::shared_ptr<Tile> ContainsPoint(sf::Vector2f p);
 };

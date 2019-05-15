@@ -13,7 +13,6 @@ class Dungeon : public IDrawable, public IUpdatable
 public:
 	vector<shared_ptr<Floor>> floors;
 	Screen* screen;
-	int currentFloor;
 	int floorSize;
 	int floorCount;
 
@@ -25,4 +24,9 @@ public:
 
 	void Display();
 	void Update();
+
+	shared_ptr<Floor> getCurrentFloor();
+
+private:
+	int currentFloor;
 };

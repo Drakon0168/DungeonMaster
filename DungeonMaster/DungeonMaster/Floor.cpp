@@ -29,3 +29,14 @@ void Floor::Display() {
 
 void Floor::Update() {
 }
+
+std::shared_ptr<Tile> Floor::ContainsPoint(sf::Vector2f p)
+{
+	p = sf::Vector2f(floorf(p.x), floorf(p.y));
+
+	if (p.x >= 0 && p.y >= 0 && p.x < size && p.y < size) {
+		return tiles[p];
+	}
+
+	return nullptr;
+}

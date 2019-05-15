@@ -3,9 +3,7 @@
 #include "GameplayScreen.h"
 #include "Button.h"
 
-#define mousePosition GameManager::Instance()->mousePosition
-#define windowWidth GameManager::Instance()->windowWidth
-#define windowHeight GameManager::Instance()->windowHeight
+#define gameManager GameManager::Instance()
 
 GameplayScreen::GameplayScreen()
 {
@@ -41,19 +39,19 @@ void GameplayScreen::Update()
 
 	//Check if the mouse is on the edge of the window and if it is set the camera direction
 	float distanceFromEdge = cameraMoveThreshold;
-	if (mousePosition.x < cameraMoveThreshold || mousePosition.y < cameraMoveThreshold || mousePosition.x > windowWidth - cameraMoveThreshold || mousePosition.y > windowHeight - cameraMoveThreshold) {
+	if (gameManager->mousePosition.x < cameraMoveThreshold || gameManager->mousePosition.y < cameraMoveThreshold || gameManager->mousePosition.x > gameManager->windowWidth - cameraMoveThreshold || gameManager->mousePosition.y > gameManager->windowHeight - cameraMoveThreshold) {
 		//Adjust camera move speed based on the mouse's distance from the edge of the screen
-		if (mousePosition.x < distanceFromEdge) {
-			distanceFromEdge = mousePosition.x;
+		if (gameManager->mousePosition.x < distanceFromEdge) {
+			distanceFromEdge = gameManager->mousePosition.x;
 		}
-		if (mousePosition.y < distanceFromEdge) {
-			distanceFromEdge = mousePosition.y;
+		if (gameManager->mousePosition.y < distanceFromEdge) {
+			distanceFromEdge = gameManager->mousePosition.y;
 		}
-		if (windowWidth - mousePosition.x < distanceFromEdge) {
-			distanceFromEdge = windowWidth - mousePosition.x;
+		if (gameManager->windowWidth - gameManager->mousePosition.x < distanceFromEdge) {
+			distanceFromEdge = gameManager->windowWidth - gameManager->mousePosition.x;
 		}
-		if (windowHeight - mousePosition.y < distanceFromEdge) {
-			distanceFromEdge = windowHeight - mousePosition.y;
+		if (gameManager->windowHeight - gameManager->mousePosition.y < distanceFromEdge) {
+			distanceFromEdge = gameManager->windowHeight - gameManager->mousePosition.y;
 		}
 
 		if (distanceFromEdge < 0) {
@@ -62,8 +60,19 @@ void GameplayScreen::Update()
 
 		distanceFromEdge = cameraMoveThreshold - distanceFromEdge;
 
-		cameraDirection = Vector2f(mousePosition.x - (windowWidth / 2), mousePosition.y - (windowWidth / 2));
+		cameraDirection = Vector2f(gameManager->mousePosition.x - (gameManager->windowWidth / 2), gameManager->mousePosition.y - (gameManager->windowWidth / 2));
 		cameraDirection *= 1 / sqrt(cameraDirection.x * cameraDirection.x + cameraDirection.y * cameraDirection.y);
+	}
+
+	//Get the mouse position in the game world and floor to the nearest int
+	Vector2f mousePosition = Vector2f(gameManager->mousePosition.x, gameManager->mousePosition.y) + Vector2f(DefaultView->getCenter().x, DefaultView->getCenter().y) - Vector2f(gameManager->windowWidth / 2, gameManager->windowHeight / 2);
+	mousePosition /= Dungeon::tileSize;
+	mousePosition = Vector2f(floorf(mousePosition.x), floorf(mousePosition.y));
+
+	//TODO: Do something with the currently hovered over tile
+	shared_ptr<Tile> currentTile = dungeon->getCurrentFloor()->ContainsPoint(mousePosition);
+	if (currentTile != nullptr) {
+		currentTile->ChangeType(TileType::Wall);
 	}
 
 	DefaultView->move(cameraDirection * cameraMaxSpeed * (distanceFromEdge / cameraMoveThreshold) * GameManager::Instance()->deltaTime);

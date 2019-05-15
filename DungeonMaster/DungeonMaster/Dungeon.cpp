@@ -35,3 +35,8 @@ void Dungeon::Update()
 {
 	floors[currentFloor]->Update();
 }
+
+shared_ptr<Floor> Dungeon::getCurrentFloor()
+{
+	return floors[currentFloor];
+}

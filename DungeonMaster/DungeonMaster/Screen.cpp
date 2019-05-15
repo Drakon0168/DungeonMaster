@@ -2,11 +2,16 @@
 #include "Screen.h"
 #include "GameManager.h"
 
+shared_ptr<sf::Font> Screen::buttonFont = shared_ptr<sf::Font>(nullptr);
+
 Screen::Screen()
 {
 	background = new sf::RectangleShape(sf::Vector2f(GameManager::Instance()->windowWidth, GameManager::Instance()->windowHeight));
 	UIView = shared_ptr<sf::View>(new sf::View(sf::FloatRect(0, 0, GameManager::Instance()->windowWidth, GameManager::Instance()->windowHeight)));
 	DefaultView = shared_ptr<sf::View>(new sf::View(sf::FloatRect(0, 0, GameManager::Instance()->windowWidth, GameManager::Instance()->windowHeight)));
+
+	buttonFont = shared_ptr<sf::Font>(new sf::Font());
+	buttonFont->loadFromFile("Fonts\\TestFont.ttf");
 }
 
 Screen::~Screen()

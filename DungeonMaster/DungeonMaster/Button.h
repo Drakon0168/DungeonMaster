@@ -37,6 +37,6 @@ private:
 	std::shared_ptr<Font> font;
 	std::shared_ptr<Text> text;
 
-	void setupText(string fontPath, string buttonText);
+	void setupText(string buttonText);
 };
 
