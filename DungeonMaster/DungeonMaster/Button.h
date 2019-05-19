@@ -34,8 +34,8 @@ public:
 	void(*OnClick)();
 private:
 	std::shared_ptr<RectangleShape> background;
-	std::shared_ptr<Font> font;
 	std::shared_ptr<Text> text;
+	Font font;
 
 	void setupText(string buttonText);
 };

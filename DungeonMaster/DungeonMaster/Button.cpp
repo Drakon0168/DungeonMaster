@@ -154,12 +154,11 @@ bool Button::ContainsPoint(sf::Vector2i p)
 
 void Button::setupText(string buttonText)
 {
-	//Load the font
-	font = Screen::buttonFont;
-
+	//Set font
+	font = *Screen::buttonFont;
 	//Setup the text
 	text = std::shared_ptr<Text>(new Text());
-	text->setFont(*font);
+	text->setFont(font);
 	text->setString(buttonText);
 	text->setCharacterSize(GameManager::Instance()->defaultTextSize);
 	text->setFillColor(Color::Black);

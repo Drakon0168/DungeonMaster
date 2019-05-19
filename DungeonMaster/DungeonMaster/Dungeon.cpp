@@ -21,7 +21,6 @@ Dungeon::Dungeon(Screen* screen, int floorCount)
 	}
 }
 
-
 Dungeon::~Dungeon()
 {
 }
