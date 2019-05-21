@@ -171,6 +171,8 @@
     <ClInclude Include="GameplayScreen.h" />
     <ClInclude Include="IDrawable.h" />
     <ClInclude Include="GameManager.h" />
+    <ClInclude Include="Input.h" />
+    <ClInclude Include="InputManager.h" />
     <ClInclude Include="IUpdatable.h" />
     <ClInclude Include="MainMenuScreen.h" />
     <ClInclude Include="pch.h" />
@@ -185,6 +187,8 @@
     <ClCompile Include="Floor.cpp" />
     <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="GameplayScreen.cpp" />
+    <ClCompile Include="Input.cpp" />
+    <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="MainMenuScreen.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>

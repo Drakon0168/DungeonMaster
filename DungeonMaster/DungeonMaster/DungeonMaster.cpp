@@ -1,5 +1,6 @@
 #include "pch.h"
 #include "GameManager.h"
+#include "InputManager.h"
 
 using namespace sf;
 
@@ -18,6 +19,8 @@ int main()
 	GameManager::Instance()->window = &window;
 	GameManager::Instance()->SetupScreens();
 
+	InputManager::SetupInputs();
+
 	while (window.isOpen()) {
 		Event event;
 		float currentTime = clock.getElapsedTime().asSeconds();
@@ -30,7 +33,7 @@ int main()
 			}
 		}
 
-		//Process Input
+		InputManager::Update();
 
 		GameManager::Instance()->Update(deltaTime);
 
