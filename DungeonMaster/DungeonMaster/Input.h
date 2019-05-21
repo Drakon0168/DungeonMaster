@@ -18,6 +18,7 @@ public:
 	InputState state;
 	T enumValue;
 	bool(*GetState)(T);
+
 	Input(bool(*GetState)(T), T enumValue);
 
 	void Update();

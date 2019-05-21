@@ -13,12 +13,13 @@ enum Controls {
 class InputManager
 {
 public:
-	//static map<Controls, shared_ptr<Input<int>>> Inputs;
+	map<Controls, shared_ptr<Input<int>>> Inputs;
 
 	InputManager();
 	~InputManager();
 
-	static void SetupInputs();
-	static void Update();
-};
+	static InputManager* Instance();
 
+	void SetupInputs();
+	void Update();
+};

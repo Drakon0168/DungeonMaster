@@ -13,10 +13,10 @@ Tile::Tile(sf::Vector2f position)
 	float tileSize = Dungeon::tileSize;
 	textureTileSize = 32.0f;
 
-	sprite->setTexture(*Dungeon::tileTexture);
-	sprite->setTextureRect(sf::IntRect(textureTileSize * type, 0, textureTileSize, textureTileSize));
-	sprite->setScale(tileSize / sprite->getTextureRect().width, tileSize / sprite->getTextureRect().height);
-	sprite->setPosition(position * tileSize);
+	//sprite->setTexture(*Dungeon::tileTexture);
+	//sprite->setTextureRect(sf::IntRect(textureTileSize * type, 0, textureTileSize, textureTileSize));
+	//sprite->setScale(tileSize / sprite->getTextureRect().width, tileSize / sprite->getTextureRect().height);
+	//sprite->setPosition(position * tileSize);
 }
 
 Tile::~Tile()
@@ -25,11 +25,11 @@ Tile::~Tile()
 
 void Tile::Display()
 {
-	GameManager::Instance()->window->draw(*sprite);
+	//GameManager::Instance()->window->draw(*sprite);
 }
 
 void Tile::ChangeType(TileType type)
 {
-	this->type = type;
-	sprite->setTextureRect(sf::IntRect(textureTileSize * type, 0, textureTileSize, textureTileSize));
+	/*this->type = type;
+	sprite->setTextureRect(sf::IntRect(textureTileSize * type, 0, textureTileSize, textureTileSize));*/
 }

@@ -107,7 +107,7 @@
       <Filter>Source Files\Systems</Filter>
     </ClCompile>
     <ClCompile Include="Input.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Systems</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

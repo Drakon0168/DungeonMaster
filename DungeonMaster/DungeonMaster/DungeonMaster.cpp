@@ -19,7 +19,7 @@ int main()
 	GameManager::Instance()->window = &window;
 	GameManager::Instance()->SetupScreens();
 
-	InputManager::SetupInputs();
+	InputManager::Instance()->SetupInputs();
 
 	while (window.isOpen()) {
 		Event event;
@@ -33,7 +33,7 @@ int main()
 			}
 		}
 
-		InputManager::Update();
+		InputManager::Instance()->Update();
 
 		GameManager::Instance()->Update(deltaTime);
 

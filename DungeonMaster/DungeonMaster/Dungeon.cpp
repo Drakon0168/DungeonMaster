@@ -2,7 +2,7 @@
 #include "Dungeon.h"
 
 float Dungeon::tileSize = 32.0f;
-shared_ptr<sf::Texture> Dungeon::tileTexture = shared_ptr<sf::Texture>(nullptr);
+//shared_ptr<sf::Texture> Dungeon::tileTexture = shared_ptr<sf::Texture>(nullptr);
 
 Dungeon::Dungeon(Screen* screen, int floorCount)
 {
@@ -11,8 +11,8 @@ Dungeon::Dungeon(Screen* screen, int floorCount)
 	currentFloor = 0;
 	floorSize = 25;
 
-	tileTexture = shared_ptr<sf::Texture>(new sf::Texture());
-	tileTexture->loadFromFile("Textures\\TileTexture.png");
+	//tileTexture = shared_ptr<sf::Texture>(new sf::Texture());
+	//tileTexture->loadFromFile("Textures\\TileTexture.png");
 
 	for (int i = 0; i < floorCount; i++) {
 		floors.push_back(shared_ptr<Floor>(new Floor(floorSize)));
