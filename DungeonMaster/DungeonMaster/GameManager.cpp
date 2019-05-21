@@ -13,7 +13,7 @@ GameManager::GameManager()
 
 	buttonDefaultColor = sf::Color(100, 100, 100, 255);
 	buttonHoverColor = sf::Color(200, 200, 200, 255);
-	buttonPressedColor = sf::Color(50, 50, 50, 255);
+	buttonPressedColor = sf::Color(75, 75, 75, 255);
 }
 
 GameManager::~GameManager()

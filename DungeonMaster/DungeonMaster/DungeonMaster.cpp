@@ -37,6 +37,23 @@ int main()
 
 		GameManager::Instance()->Update(deltaTime);
 
+		cout << "Left Click State: ";
+
+		switch (InputManager::Instance()->Inputs[Controls::LeftClick]->state) {
+		case InputState::Down:
+			cout << "Down" << endl;
+			break;
+		case InputState::Up:
+			cout << "Up" << endl;
+			break;
+		case InputState::Pressed:
+			cout << "Pressed" << endl;
+			break;
+		case InputState::Released:
+			cout << "Released" << endl;
+			break;
+		}
+
 		window.clear();
 
 		GameManager::Instance()->Display();

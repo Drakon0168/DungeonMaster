@@ -1,8 +1,10 @@
 #include "pch.h"
 #include "Button.h"
 #include "GameManager.h"
+#include "InputManager.h"
 
 #define mousePosition GameManager::Instance()->mousePosition
+#define inputManager InputManager::Instance()
 
 Button::Button()
 {
@@ -133,10 +135,10 @@ void Button::Update()
 		background->setFillColor(GameManager::Instance()->buttonHoverColor);
 
 		//If clicked
-		if (Mouse::isButtonPressed(Mouse::Left)) {
+		if (inputManager->Inputs[Controls::LeftClick]->state == InputState::Down) {
 			background->setFillColor(GameManager::Instance()->buttonPressedColor);
-
-			//TODO: Call on click on the first frame that the mouse button is released
+		}
+		else if (inputManager->Inputs[Controls::LeftClick]->state == InputState::Released) {
 			if (OnClick != nullptr) {
 				OnClick();
 			}
