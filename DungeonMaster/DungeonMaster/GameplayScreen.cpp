@@ -1,9 +1,11 @@
 #include "pch.h"
+#include "InputManager.h"
 #include "GameManager.h"
 #include "GameplayScreen.h"
 #include "Button.h"
 
 #define gameManager GameManager::Instance()
+#define inputManager InputManager::Instance()
 
 GameplayScreen::GameplayScreen()
 {
@@ -70,8 +72,9 @@ void GameplayScreen::Update()
 	mousePosition = Vector2f(floorf(mousePosition.x), floorf(mousePosition.y));
 
 	//TODO: Do something with the currently hovered over tile
+	//TODO: Enable click and drag tile selection
 	shared_ptr<Tile> currentTile = dungeon->getCurrentFloor()->ContainsPoint(mousePosition);
-	if (currentTile != nullptr) {
+	if (currentTile != nullptr && inputManager->Inputs[Controls::LeftClick]->state == InputState::Down) {
 		currentTile->ChangeType(TileType::Wall);
 	}
 

@@ -17,7 +17,7 @@ public:
 	int floorCount;
 
 	static float tileSize;
-	//static shared_ptr<sf::Texture> tileTexture;
+	static shared_ptr<sf::Texture> tileTexture;
 
 	Dungeon(Screen* screen, int floorCount);
 	~Dungeon();
