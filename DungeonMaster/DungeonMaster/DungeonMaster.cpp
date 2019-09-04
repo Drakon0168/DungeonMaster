@@ -16,7 +16,7 @@ int main()
 	float lastTime = 0;
 	srand(0);
 
-	GameManager::Instance()->window = &window;
+	GameManager::Instance()->window = shared_ptr<RenderWindow>(&window);
 	GameManager::Instance()->SetupScreens();
 
 	InputManager::Instance()->SetupInputs();
@@ -37,7 +37,7 @@ int main()
 
 		GameManager::Instance()->Update(deltaTime);
 
-		cout << "Left Click State: ";
+		/*cout << "Left Click State: ";
 
 		switch (InputManager::Instance()->Inputs[Controls::LeftClick]->state) {
 		case InputState::Down:
@@ -52,7 +52,7 @@ int main()
 		case InputState::Released:
 			cout << "Released" << endl;
 			break;
-		}
+		}*/
 
 		window.clear();
 
