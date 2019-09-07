@@ -12,6 +12,7 @@ public:
 	vector<shared_ptr<IDrawable>> UIObjects;
 	vector<shared_ptr<IUpdatable>> updatableObjects;
 
+	static shared_ptr<sf::RenderWindow> window;
 	static shared_ptr<sf::Font> buttonFont;
 
 	Screen();

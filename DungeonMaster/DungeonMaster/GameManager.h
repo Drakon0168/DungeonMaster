@@ -14,7 +14,7 @@ public:
 	int windowWidth;
 	int windowHeight;
 	float deltaTime;
-	sf::RenderWindow* window;
+	shared_ptr<sf::RenderWindow> window;
 
 	~GameManager();
 

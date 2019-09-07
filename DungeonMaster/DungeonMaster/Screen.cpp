@@ -2,6 +2,7 @@
 #include "Screen.h"
 #include "GameManager.h"
 
+shared_ptr<sf::RenderWindow> Screen::window = nullptr;
 shared_ptr<sf::Font> Screen::buttonFont = nullptr;
 
 Screen::Screen()
@@ -46,5 +47,7 @@ void Screen::Update()
 
 void Screen::closeGame()
 {
-	exit(0);
+	if (window != nullptr) {
+		window->close();
+	}
 }

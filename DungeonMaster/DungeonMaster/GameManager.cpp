@@ -18,7 +18,7 @@ GameManager::GameManager()
 
 GameManager::~GameManager()
 {
-	for (unsigned int i = 0; i < screens->size(); i++)
+	for (int i = 0; i < screens->size(); i++)
 	{
 		delete (*screens)[i];
 	}
@@ -38,6 +38,8 @@ void GameManager::SetupScreens()
 	screens = shared_ptr<vector<Screen*>>(new vector<Screen*>);
 	screens->push_back((Screen*) new MainMenuScreen());
 	screens->push_back((Screen*) new GameplayScreen());
+
+	Screen::window = window;
 }
 
 void GameManager::SwitchScreen(ScreenType screen)
