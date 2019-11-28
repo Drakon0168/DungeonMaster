@@ -1,53 +1,61 @@
 #include "pch.h"
 #include "Screen.h"
-#include "GameManager.h"
-
-shared_ptr<sf::RenderWindow> Screen::window = nullptr;
-shared_ptr<sf::Font> Screen::buttonFont = nullptr;
 
 Screen::Screen()
 {
-	background = new sf::RectangleShape(sf::Vector2f(GameManager::Instance()->windowWidth, GameManager::Instance()->windowHeight));
-	UIView = shared_ptr<sf::View>(new sf::View(sf::FloatRect(0, 0, GameManager::Instance()->windowWidth, GameManager::Instance()->windowHeight)));
-	DefaultView = shared_ptr<sf::View>(new sf::View(sf::FloatRect(0, 0, GameManager::Instance()->windowWidth, GameManager::Instance()->windowHeight)));
-
-	if (buttonFont == nullptr) {
-		buttonFont = shared_ptr<sf::Font>(new sf::Font());
-		buttonFont->loadFromFile("Fonts\\TestFont.ttf");
-	}
+	
 }
 
 Screen::~Screen()
 {
+	for (int i = 0; i < drawables.size(); i++) {
+		delete drawables[i];
+	}
 
+	for (int i = 0; i < updateables.size(); i++) {
+		delete updateables[i];
+	}
+}
+
+Screen::Screen(const Screen& other)
+{
+	//TODO: Copy drawable and updateable lists
+}
+
+const Screen& Screen::operator=(const Screen& other)
+{
+	return Screen(other);
+}
+
+void Screen::Update(float deltaTime)
+{
+	for (int i = 0; i < updateables.size(); i++) {
+		updateables[i]->Update(deltaTime);
+	}
 }
 
 void Screen::Display()
 {
-	GameManager::Instance()->window->setView(*UIView);
-	GameManager::Instance()->window->draw(*background);
+	GameManager::GetInstance()->GetRenderWindow()->draw(background);
 
-	GameManager::Instance()->window->setView(*DefaultView);
-	for (int i = 0; i < drawableObjects.size(); i++) {
-		drawableObjects[i]->Display();
-	}
-
-	GameManager::Instance()->window->setView(*UIView);
-	for (int i = 0; i < UIObjects.size(); i++) {
-		UIObjects[i]->Display();
+	for (int i = 0; i < drawables.size(); i++) {
+		drawables[i]->Display();
 	}
 }
 
-void Screen::Update()
+void Screen::Init()
 {
-	for (int i = 0; i < updatableObjects.size(); i++) {
-		updatableObjects[i]->Update();
-	}
+	background.setFillColor(ScreenManager::GetInstance()->GetClearColor());
+	background.setSize((Vector2f)GameManager::GetInstance()->GetScreenSize());
+	background.setPosition(Vector2f(0, 0));
 }
 
-void Screen::closeGame()
+void Screen::FadeOut(float fadeTime)
 {
-	if (window != nullptr) {
-		window->close();
-	}
+	//TODO: Fade out the screen
+}
+
+void Screen::FadeIn(float fadeTime)
+{
+	//TODO: Fade in the screen
 }

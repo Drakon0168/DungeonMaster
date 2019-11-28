@@ -1,64 +1,85 @@
 #include "pch.h"
 #include "GameManager.h"
-#include "MainMenuScreen.h"
-#include "GameplayScreen.h"
+
+GameManager* GameManager::instance = nullptr;
 
 GameManager::GameManager()
 {
-	windowWidth = 800;
-	windowHeight = 600;
-	currentScreen = ScreenType::MainMenu;
-	deltaTime = 0;
-	window = nullptr;
+	//Set up SFML Window
+	window = new RenderWindow(VideoMode(screenSize.x, screenSize.y), "Dungeon Master");
+	window->setFramerateLimit(60);
 
-	buttonDefaultColor = sf::Color(100, 100, 100, 255);
-	buttonHoverColor = sf::Color(200, 200, 200, 255);
-	buttonPressedColor = sf::Color(75, 75, 75, 255);
+	//Set up update loop variables
+	Clock clock;
+	srand(0);
 }
 
 GameManager::~GameManager()
 {
-	for (int i = 0; i < screens->size(); i++)
-	{
-		delete (*screens)[i];
+	delete window;
+}
+
+GameManager* GameManager::GetInstance()
+{
+	if (instance == nullptr) {
+		instance = new GameManager();
 	}
+
+	return instance;
 }
 
-GameManager* GameManager::Instance()
+Vector2i GameManager::GetScreenSize()
 {
-	static GameManager instance;
-
-	return &instance;
+	return screenSize;
 }
 
-void GameManager::SetupScreens()
+RenderWindow* GameManager::GetRenderWindow()
 {
-	currentScreen = ScreenType::MainMenu;
-
-	screens = shared_ptr<vector<Screen*>>(new vector<Screen*>);
-	screens->push_back((Screen*) new MainMenuScreen());
-	screens->push_back((Screen*) new GameplayScreen());
-
-	Screen::window = window;
+	return window;
 }
 
-void GameManager::SwitchScreen(ScreenType screen)
+void GameManager::Update()
 {
-	//TODO: Add screen switch animation
-	currentScreen = screen;
+	//Update timers
+	float currentTime = clock.getElapsedTime().asSeconds();
+	deltaTime = currentTime - lastTime;
+	lastTime = currentTime;
+
+	ScreenManager::GetInstance()->Update(deltaTime);
 }
 
 void GameManager::Display()
 {
-	(*screens)[(int)currentScreen]->Display();
+	ScreenManager::GetInstance()->Display();
 }
 
-void GameManager::Update(float deltaTime)
+void GameManager::Init()
 {
-	this->deltaTime = deltaTime;
+	ScreenManager::GetInstance()->Init();
+}
 
-	windowPosition = window->getPosition();
-	mousePosition = sf::Mouse::getPosition(*window);
+void GameManager::StartLoop()
+{
+	while (window->isOpen()) {
+		Event event;
+		
+		while (window->pollEvent(event)) {
+			if (event.type == Event::Closed) {
+				CloseGame();
+			}
+		}
 
-	(*screens)[(int)currentScreen]->Update();
+		Update();
+
+		window->clear();
+
+		Display();
+
+		window->display();
+	}
+}
+
+void GameManager::CloseGame()
+{
+	window->close();
 }

@@ -11,4 +11,12 @@
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
 
+//My Classes
+#include "IDrawable.h"
+#include "IUpdatable.h"
+#include "PublicEnums.h"
+
+#include "GameManager.h"
+#include "ScreenManager.h"
+
 #endif //PCH_H

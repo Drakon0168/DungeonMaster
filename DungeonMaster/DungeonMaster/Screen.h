@@ -1,34 +1,27 @@
 #pragma once
+#include "pch.h"
 
-#include "IDrawable.h"
-#include "IUpdatable.h"
-
-using namespace std;
-
-class Screen : public IDrawable, public IUpdatable
+class Screen : IDrawable, IUpdatable
 {
+private:
+	std::vector<IDrawable*> drawables;
+	std::vector<IUpdatable*> updateables;
+
+	RectangleShape background;
 public:
-	vector<shared_ptr<IDrawable>> drawableObjects;
-	vector<shared_ptr<IDrawable>> UIObjects;
-	vector<shared_ptr<IUpdatable>> updatableObjects;
-
-	static shared_ptr<sf::RenderWindow> window;
-	static shared_ptr<sf::Font> buttonFont;
-
+#pragma region Constructor
 	Screen();
-	virtual ~Screen();
-
-	//Draws all sprites for the screen
-	virtual void Display();
-	//Updates all of the objects for the screen
-	virtual void Update();
-
-	static void closeGame();
-protected:
-	sf::RectangleShape* background;
-	sf::Color backgroundColor = sf::Color::White;
-
-	shared_ptr<sf::View> UIView;
-	shared_ptr<sf::View> DefaultView;
+	~Screen();
+	Screen(const Screen& other);
+	const Screen& operator=(const Screen& other);
+#pragma endregion
+#pragma region Update
+	void Update(float deltaTime);
+	void Display();
+#pragma endregion
+#pragma region Functions
+	void Init();
+	void FadeOut(float fadeTime);
+	void FadeIn(float fadeTime);
+#pragma endregion
 };
-

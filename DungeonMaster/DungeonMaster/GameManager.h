@@ -1,47 +1,51 @@
 #pragma once
-#include "Screen.h"
+#include "pch.h";
 
-using namespace std;
-
-enum ScreenType {
-	MainMenu,
-	Gameplay,
-};
+using namespace sf;
 
 class GameManager
 {
+private:
+	Clock clock;
+	float deltaTime = 0;
+	float lastTime = 0;
+	Vector2i screenSize = Vector2i(1080, 720);
+
+	RenderWindow* window;
+
+	static GameManager* instance;
 public:
-	int windowWidth;
-	int windowHeight;
-	float deltaTime;
-	shared_ptr<sf::RenderWindow> window;
+#pragma region Constructors
+	GameManager();
 
 	~GameManager();
 
-	static GameManager* Instance();
+	GameManager(const GameManager& other);
 
-	//Sets the screens vector 
-	void SetupScreens();
-	//Switches to the specified screen
-	void SwitchScreen(ScreenType screen);
-
-	//Calls the Display method of the screen that is currently active
+	GameManager& operator=(const GameManager& other);
+#pragma endregion
+#pragma region Singleton
+	static GameManager* GetInstance();
+#pragma endregion
+#pragma region Accessors
+	//Returns the size of the window in pixels
+	Vector2i GetScreenSize();
+	//Returns a pointer to the current render window
+	RenderWindow* GetRenderWindow();
+#pragma endregion
+#pragma region Update
+	//Updates all other manager classes
+	void Update();
+	//Displays all other displayable classes
 	void Display();
-	//Calls the Update method of the screen that is currently active
-	void Update(float deltaTime);
-
-	//Global Variables
-	sf::Color buttonDefaultColor;
-	sf::Color buttonHoverColor;
-	sf::Color buttonPressedColor;
-	int defaultTextSize = 24;
-
-	//The position of the window on the screen
-	sf::Vector2i windowPosition;
-	//The mouse position on the window
-	sf::Vector2i mousePosition;
-private:
-	GameManager();
-	shared_ptr<vector<Screen*>> screens;
-	ScreenType currentScreen;
+#pragma endregion
+#pragma region Functions
+	//Initializes the other managers
+	void Init();
+	//Starts the update loop
+	void StartLoop();
+	//Closes the game and deallocates memory
+	void CloseGame();
+#pragma endregion
 };
+

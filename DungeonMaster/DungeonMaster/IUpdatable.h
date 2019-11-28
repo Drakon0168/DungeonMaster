@@ -2,5 +2,5 @@
 
 class IUpdatable {
 public:
-	virtual void Update() = 0;
+	virtual void Update(float deltaTime) = 0;
 };
