@@ -8,7 +8,6 @@ GameManager::GameManager()
 	//Set up SFML Window
 	window = new RenderWindow(VideoMode(screenSize.x, screenSize.y), "Dungeon Master");
 	window->setFramerateLimit(60);
-
 	//Set up update loop variables
 	Clock clock;
 	srand(0);

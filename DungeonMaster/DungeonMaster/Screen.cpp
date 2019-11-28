@@ -1,6 +1,9 @@
 #include "pch.h"
 #include "Screen.h"
 
+#define GameInstance GameManager::GetInstance()
+#define ScreenInstance ScreenManager::GetInstance()
+
 Screen::Screen()
 {
 	
@@ -19,7 +22,20 @@ Screen::~Screen()
 
 Screen::Screen(const Screen& other)
 {
-	//TODO: Copy drawable and updateable lists
+	for (int i = 0; i < other.drawables.size(); i++) {
+		drawables.push_back(other.drawables[i]);
+	}
+
+	for (int i = 0; i < other.updateables.size(); i++) {
+		updateables.push_back(other.updateables[i]);
+	}
+
+	background = other.background;
+	fade = other.fade;
+	fadeAlpha = other.fadeAlpha;
+	fadeTime = other.fadeTime;
+	fadingIn = other.fadingIn;
+	fadingOut = other.fadingOut;
 }
 
 const Screen& Screen::operator=(const Screen& other)
@@ -29,33 +45,72 @@ const Screen& Screen::operator=(const Screen& other)
 
 void Screen::Update(float deltaTime)
 {
+	//Update screen objects
 	for (int i = 0; i < updateables.size(); i++) {
 		updateables[i]->Update(deltaTime);
+	}
+
+	//Fade the screen
+	if (fadingIn) {
+		fadeAlpha -= 255 * fadeTime * deltaTime;
+		
+		if (fadeAlpha < 0) {
+			fadeAlpha = 0;
+			fadingIn = false;
+		}
+
+		Color fadeColor = fade.getFillColor();
+		fadeColor.a = fadeAlpha;
+		fade.setFillColor(fadeColor);
+	}
+
+	if (fadingOut) {
+		fadeAlpha += 255 * fadeTime * deltaTime;
+
+		if (fadeAlpha > 255) {
+			fadeAlpha = 0;
+			fadingOut = false;
+			ScreenInstance->FadeIn();
+		}
+
+		Color fadeColor = fade.getFillColor();
+		fadeColor.a = fadeAlpha;
+		fade.setFillColor(fadeColor);
 	}
 }
 
 void Screen::Display()
 {
-	GameManager::GetInstance()->GetRenderWindow()->draw(background);
+	GameInstance->GetRenderWindow()->draw(background);
 
 	for (int i = 0; i < drawables.size(); i++) {
 		drawables[i]->Display();
 	}
+
+	GameInstance->GetRenderWindow()->draw(fade);
 }
 
 void Screen::Init()
 {
-	background.setFillColor(ScreenManager::GetInstance()->GetClearColor());
-	background.setSize((Vector2f)GameManager::GetInstance()->GetScreenSize());
+	background.setFillColor(ScreenInstance->GetClearColor());
+	background.setSize((Vector2f)GameInstance->GetScreenSize());
 	background.setPosition(Vector2f(0, 0));
+
+	Color fadeColor = Color::Black;
+	fadeColor.a = fadeAlpha;
+	fade.setFillColor(fadeColor);
+	fade.setSize((Vector2f)GameInstance->GetScreenSize());
+	fade.setPosition(Vector2f(0, 0));
 }
 
-void Screen::FadeOut(float fadeTime)
+void Screen::FadeOut(float time)
 {
-	//TODO: Fade out the screen
+	fadingOut = true;
+	fadeTime = time;
 }
 
-void Screen::FadeIn(float fadeTime)
+void Screen::FadeIn(float time)
 {
-	//TODO: Fade in the screen
+	fadingIn = true;
+	fadeTime = time;
 }

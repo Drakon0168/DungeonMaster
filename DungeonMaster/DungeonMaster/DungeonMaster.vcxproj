@@ -167,6 +167,8 @@
   <ItemGroup>
     <ClInclude Include="GameManager.h" />
     <ClInclude Include="IDrawable.h" />
+    <ClInclude Include="Input.h" />
+    <ClInclude Include="InputManager.h" />
     <ClInclude Include="IUpdatable.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="PublicEnums.h" />
@@ -177,6 +179,8 @@
   <ItemGroup>
     <ClCompile Include="DungeonMaster.cpp" />
     <ClCompile Include="GameManager.cpp" />
+    <ClCompile Include="Input.cpp" />
+    <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>

@@ -15,6 +15,7 @@
 #include "IDrawable.h"
 #include "IUpdatable.h"
 #include "PublicEnums.h"
+#include "Input.h"
 
 #include "GameManager.h"
 #include "ScreenManager.h"
