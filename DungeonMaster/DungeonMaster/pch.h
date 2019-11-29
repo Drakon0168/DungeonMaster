@@ -11,13 +11,22 @@
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
 
-//My Classes
+//Custom
+//	Interfaces
 #include "IDrawable.h"
 #include "IUpdatable.h"
+
+//	Enums
 #include "PublicEnums.h"
+
+//	Structs
 #include "Input.h"
 
+//	Singletons
 #include "GameManager.h"
 #include "ScreenManager.h"
+#include "InputManager.h"
+
+//Classes
 
 #endif //PCH_H

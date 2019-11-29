@@ -44,6 +44,7 @@ void GameManager::Update()
 	deltaTime = currentTime - lastTime;
 	lastTime = currentTime;
 
+	InputManager::GetInstance()->Update();
 	ScreenManager::GetInstance()->Update(deltaTime);
 }
 

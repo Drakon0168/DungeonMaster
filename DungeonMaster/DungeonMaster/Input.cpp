@@ -1,5 +1,13 @@
 #include "pch.h"
 
+Input::Input()
+{
+	currentState = InputState::Up;
+	lastState = InputState::Up;
+	keyCode = Controls::InputCode::Select;
+	inputType = InputType::Mouse;
+}
+
 Input::Input(int inputType, int keyCode)
 {
 	this->inputType = inputType;
@@ -48,4 +56,6 @@ void Input::Update()
 		}
 		break;
 	}
+
+	std::cout << "Control: " << keyCode << ", State: " << currentState << std::endl;
 }

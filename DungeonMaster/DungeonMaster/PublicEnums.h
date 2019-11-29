@@ -6,26 +6,25 @@ enum Screens {
 	Options
 };
 
-enum InputCode {
-	W,
-	A,
-	S,
-	D,
-	Space,
-	Escape,
-	LeftMouse,
-	RightMouse,
-	MiddleMouse
-};
+namespace Controls {
+	enum InputCode {
+		Up,
+		Down,
+		Left,
+		Right,
+		Escape,
+		Select
+	};
+}
 
 enum InputState {
-	Down,
 	Up,
+	Down,
 	Pressed,
 	Released
 };
 
 enum InputType {
 	Mouse,
-	Keyboard,
+	Keyboard
 };
