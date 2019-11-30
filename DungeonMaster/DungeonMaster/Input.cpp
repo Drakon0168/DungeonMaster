@@ -16,7 +16,7 @@ Input::Input(int inputType, int keyCode)
 
 void Input::Update()
 {
-	lastState = currentState;
+	std::cout << "Control: " << keyCode << ", Current State: " << currentState << ", Last State: " << lastState << std::endl;
 
 	switch (inputType) {
 	case InputType::Keyboard:
@@ -27,6 +27,8 @@ void Input::Update()
 			else {
 				currentState = InputState::Down;
 			}
+
+			lastState = InputState::Down;
 		}
 		else {
 			if (lastState == InputState::Down) {
@@ -35,27 +37,14 @@ void Input::Update()
 			else {
 				currentState = InputState::Up;
 			}
+
+			lastState = InputState::Up;
 		}
 		break;
 	case InputType::Mouse:
-		if (sf::Mouse::isButtonPressed((sf::Mouse::Button)keyCode)) {
-			if (lastState == InputState::Up) {
-				currentState = InputState::Pressed;
-			}
-			else {
-				currentState = InputState::Down;
-			}
-		}
-		else {
-			if (lastState == InputState::Down) {
-				currentState = InputState::Released;
-			}
-			else {
-				currentState = InputState::Up;
-			}
-		}
+		
 		break;
 	}
 
-	std::cout << "Control: " << keyCode << ", State: " << currentState << std::endl;
+	//std::cout << "Control: " << keyCode << ", Current State: " << currentState << ", Last State: " << lastState << std::endl;
 }

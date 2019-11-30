@@ -9,6 +9,9 @@ InputManager::InputManager()
 
 InputManager::~InputManager()
 {
+	for (std::pair<int, Input*> pair : inputs) {
+		delete pair.second;
+	}
 }
 
 InputManager* InputManager::GetInstance()
@@ -20,21 +23,21 @@ InputManager* InputManager::GetInstance()
 	return instance;
 }
 
-std::map<int, Input> InputManager::GetInputs()
+std::map<int, Input*> InputManager::GetInputs()
 {
 	return inputs;
 }
 
 void InputManager::Update()
 {
-	for (std::pair<int, Input> pair : inputs) {
-		pair.second.Update();
+	for (std::pair<int, Input*> pair : inputs) {
+		pair.second->Update();
 	}
 }
 
 void InputManager::Init()
 {
-	inputs.insert(std::pair<int, Input>(Controls::InputCode::Up, Input(InputType::Keyboard, sf::Keyboard::W)));
+	inputs.insert(std::pair<int, Input*>(Controls::InputCode::Up, new Input(InputType::Keyboard, sf::Keyboard::W)));
 	/*inputs.insert(std::pair<int, Input>(Controls::InputCode::Down, Input(InputType::Keyboard, sf::Keyboard::S)));
 	inputs.insert(std::pair<int, Input>(Controls::InputCode::Left, Input(InputType::Keyboard, sf::Keyboard::A)));
 	inputs.insert(std::pair<int, Input>(Controls::InputCode::Up, Input(InputType::Keyboard, sf::Keyboard::W)));
@@ -44,5 +47,5 @@ void InputManager::Init()
 
 int InputManager::GetInput(int inputCode)
 {
-	return inputs[inputCode].currentState;
+	return inputs[inputCode]->currentState;
 }

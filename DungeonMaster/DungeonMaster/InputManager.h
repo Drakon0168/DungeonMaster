@@ -4,7 +4,7 @@
 class InputManager
 {
 private:
-	std::map<int, Input> inputs;
+	std::map<int, Input*> inputs;
 
 	static InputManager* instance;
 public:
@@ -21,7 +21,7 @@ public:
 	static InputManager* GetInstance();
 #pragma endregion
 #pragma region Accessors
-	std::map<int, Input> GetInputs();
+	std::map<int, Input*> GetInputs();
 #pragma endregion
 #pragma region Update
 	//Updates the current state of all inputs

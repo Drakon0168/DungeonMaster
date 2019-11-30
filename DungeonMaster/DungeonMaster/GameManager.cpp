@@ -15,6 +15,8 @@ GameManager::GameManager()
 
 GameManager::~GameManager()
 {
+	delete InputManager::GetInstance();
+	delete ScreenManager::GetInstance();
 	delete window;
 }
 
@@ -55,6 +57,7 @@ void GameManager::Display()
 
 void GameManager::Init()
 {
+	InputManager::GetInstance()->Init();
 	ScreenManager::GetInstance()->Init();
 }
 
