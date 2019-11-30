@@ -5,6 +5,8 @@ class InputManager
 {
 private:
 	std::map<int, Input*> inputs;
+	Vector2i globalMousePosition; //Position of the mouse in relation to the screen
+	Vector2i windowMousePosition; //Position of the mouse in relation to the window
 
 	static InputManager* instance;
 public:

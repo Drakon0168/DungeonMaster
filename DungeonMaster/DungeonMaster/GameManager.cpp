@@ -6,8 +6,9 @@ GameManager* GameManager::instance = nullptr;
 GameManager::GameManager()
 {
 	//Set up SFML Window
-	window = new RenderWindow(VideoMode(screenSize.x, screenSize.y), "Dungeon Master");
+	window = new RenderWindow(VideoMode(DEFAULT_SCREEN_SIZE.x, DEFAULT_SCREEN_SIZE.y), "Dungeon Master");
 	window->setFramerateLimit(60);
+
 	//Set up update loop variables
 	Clock clock;
 	srand(0);
@@ -31,7 +32,7 @@ GameManager* GameManager::GetInstance()
 
 Vector2i GameManager::GetScreenSize()
 {
-	return screenSize;
+	return (Vector2i)window->getSize();
 }
 
 RenderWindow* GameManager::GetRenderWindow()
@@ -48,6 +49,11 @@ void GameManager::Update()
 
 	InputManager::GetInstance()->Update();
 	ScreenManager::GetInstance()->Update(deltaTime);
+
+	//Close the game when escape is pressed
+	if (InputManager::GetInstance()->GetInput(Controls::Escape) == InputState::Pressed) {
+		CloseGame();
+	}
 }
 
 void GameManager::Display()

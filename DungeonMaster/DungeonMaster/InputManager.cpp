@@ -5,6 +5,8 @@ InputManager* InputManager::instance = nullptr;
 
 InputManager::InputManager()
 {
+	globalMousePosition = Vector2i(0, 0);
+	windowMousePosition = Vector2i(0, 0);
 }
 
 InputManager::~InputManager()
@@ -30,19 +32,25 @@ std::map<int, Input*> InputManager::GetInputs()
 
 void InputManager::Update()
 {
+	globalMousePosition = Mouse::getPosition();
+	windowMousePosition = globalMousePosition - GameManager::GetInstance()->GetRenderWindow()->getPosition();
+
 	for (std::pair<int, Input*> pair : inputs) {
 		pair.second->Update();
 	}
+
+	//std::cout << "Global Mouse Position: (" << globalMousePosition.x << ", " << globalMousePosition.y << ")" << std::endl;
+	//std::cout << "Window Mouse Position: (" << windowMousePosition.x << ", " << windowMousePosition.y << ")" << std::endl;
 }
 
 void InputManager::Init()
 {
 	inputs.insert(std::pair<int, Input*>(Controls::InputCode::Up, new Input(InputType::Keyboard, sf::Keyboard::W)));
-	/*inputs.insert(std::pair<int, Input>(Controls::InputCode::Down, Input(InputType::Keyboard, sf::Keyboard::S)));
-	inputs.insert(std::pair<int, Input>(Controls::InputCode::Left, Input(InputType::Keyboard, sf::Keyboard::A)));
-	inputs.insert(std::pair<int, Input>(Controls::InputCode::Up, Input(InputType::Keyboard, sf::Keyboard::W)));
-	inputs.insert(std::pair<int, Input>(Controls::InputCode::Escape, Input(InputType::Keyboard, sf::Keyboard::Escape)));
-	inputs.insert(std::pair<int, Input>(Controls::InputCode::Select, Input(InputType::Mouse, sf::Mouse::Left)));*/
+	inputs.insert(std::pair<int, Input*>(Controls::InputCode::Down, new Input(InputType::Keyboard, sf::Keyboard::S)));
+	inputs.insert(std::pair<int, Input*>(Controls::InputCode::Left, new Input(InputType::Keyboard, sf::Keyboard::A)));
+	inputs.insert(std::pair<int, Input*>(Controls::InputCode::Up, new Input(InputType::Keyboard, sf::Keyboard::W)));
+	inputs.insert(std::pair<int, Input*>(Controls::InputCode::Escape, new Input(InputType::Keyboard, sf::Keyboard::Escape)));
+	inputs.insert(std::pair<int, Input*>(Controls::InputCode::Select, new Input(InputType::Mouse, sf::Mouse::Left)));
 }
 
 int InputManager::GetInput(int inputCode)

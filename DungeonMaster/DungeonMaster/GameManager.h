@@ -6,10 +6,11 @@ using namespace sf;
 class GameManager
 {
 private:
+	const Vector2i DEFAULT_SCREEN_SIZE = Vector2i(1024, 768);
+
 	Clock clock;
 	float deltaTime = 0;
 	float lastTime = 0;
-	Vector2i screenSize = Vector2i(1080, 720);
 
 	RenderWindow* window;
 
