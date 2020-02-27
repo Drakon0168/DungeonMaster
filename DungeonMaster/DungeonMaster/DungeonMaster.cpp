@@ -1,12 +1,14 @@
 #include "pch.h"
 
+#define GameInstance GameManager::GetInstance()
+
 using namespace std;
 
 int main()
 {
 	//Set up SFML Window
-	shared_ptr<sf::RenderWindow> window = make_shared<sf::RenderWindow>(sf::RenderWindow(sf::VideoMode(GameManager::Instance()->windowWidth, GameManager::Instance()->windowHeight), "Dungeon Master"));
-	window->setFramerateLimit(60);
+	GameInstance->SetWindow(make_shared<sf::RenderWindow>(sf::VideoMode(GameInstance->GetWindowWidth(), GameInstance->GetWindowHeight()), "Dungeon Master"));
+	GameInstance->GetWindow()->setFramerateLimit(60);
 
 	//Set up update loop variables
 	sf::Clock clock;
@@ -14,30 +16,25 @@ int main()
 	float lastTime = 0;
 	srand(0);
 
-	GameManager::Instance()->window = shared_ptr<sf::RenderWindow>(window);
-	GameManager::Instance()->SetupScreens();
+	GameInstance->SetupScreens();
 
 	InputManager::Instance()->SetupInputs();
 
-	while (window->isOpen()) {
+	while (GameInstance->GetWindow()->isOpen()) {
 		sf::Event event;
 		float currentTime = clock.getElapsedTime().asSeconds();
 		deltaTime = currentTime - lastTime;
 		lastTime = currentTime;
 
-		while (window->pollEvent(event)) {
+		while (GameInstance->GetWindow()->pollEvent(event)) {
 			if (event.type == sf::Event::Closed) {
-				window->close();
+				GameInstance->GetWindow()->close();
 			}
-		}
-
-		if (GameManager::Instance()->closeWindow) {
-			window->close();
 		}
 
 		InputManager::Instance()->Update();
 
-		GameManager::Instance()->Update(deltaTime);
+		GameInstance->Update(deltaTime);
 
 		/*cout << "Left Click State: ";
 
@@ -56,10 +53,10 @@ int main()
 			break;
 		}*/
 
-		window->clear();
+		GameInstance->GetWindow()->clear();
 
-		GameManager::Instance()->Display();
+		GameInstance->Draw();
 
-		window->display();
+		GameInstance->GetWindow()->display();
 	}
 }

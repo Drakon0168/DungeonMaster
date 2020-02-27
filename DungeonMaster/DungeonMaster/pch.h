@@ -11,4 +11,6 @@
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
 
+#include "GameManager.h"
+
 #endif //PCH_H
